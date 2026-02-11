@@ -1,0 +1,37 @@
+import requests, json
+from bs4 import BeautifulSoup
+
+def parseTrojmiasto(response: requests.Response):
+    soup = BeautifulSoup(response.text, "html.parser")
+    
+    ads_json = []
+    
+    ads = soup.select("div.list__item")
+    for ad in ads[:1]:
+        titleTag = ad.select("h2.list__item__content__title a")[0]
+        title = titleTag.get("title")
+        print(title)
+
+        link = titleTag.get("href")
+        print(link)
+
+        firstImageTag = ad.select("a.listItemFirstPhoto img")[0]
+        imageUrl = firstImageTag.get("src") 
+        print(imageUrl)
+
+        priceTag = ad.select("p.list__item__price__value span")[0]
+        price = ''.join(filter(str.isdigit, priceTag.text))
+        print(price)
+
+        notes = "xyz"
+
+        ad_info = {
+            "name": title,
+            "link": link,
+            "image_link": imageUrl,
+            "price": price,
+            "notes": notes
+        }
+        ads_json.append(ad_info)
+    return ads_json
+
