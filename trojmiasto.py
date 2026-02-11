@@ -10,18 +10,14 @@ def parseTrojmiasto(response: requests.Response):
     for ad in ads:
         titleTag = ad.select("h2.list__item__content__title a")[0]
         title = titleTag.get("title")
-        print(title)
 
         link = titleTag.get("href")
-        print(link)
 
         firstImageTag = ad.select("a.listItemFirstPhoto img")[0]
         imageUrl = firstImageTag.get("src") 
-        print(imageUrl)
 
         priceTag = ad.select("p.list__item__price__value span")[0]
         price = ''.join(filter(str.isdigit, priceTag.text))
-        print(price)
 
         notes = "xyz"
 
