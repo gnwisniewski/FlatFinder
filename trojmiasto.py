@@ -1,4 +1,4 @@
-import requests, json
+import requests
 from bs4 import BeautifulSoup
 
 def parseTrojmiasto(response: requests.Response):
@@ -7,7 +7,7 @@ def parseTrojmiasto(response: requests.Response):
     ads_json = []
     
     ads = soup.select("div.list__item")
-    for ad in ads[:1]:
+    for ad in ads:
         titleTag = ad.select("h2.list__item__content__title a")[0]
         title = titleTag.get("title")
         print(title)

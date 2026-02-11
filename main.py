@@ -1,4 +1,4 @@
-import requests, schedule
+import requests
 from config import queries, headers
 from urllib.parse import urlparse
 from trojmiasto import parseTrojmiasto
@@ -9,7 +9,6 @@ def main():
         response = requests.get(query, headers=headers)
         if response.ok:
             domain  = urlparse(query).netloc
-            print(f"Successfully fetched data from {domain}")
             
             if domain == "ogloszenia.trojmiasto.pl":
                 parseTrojmiasto(response)
