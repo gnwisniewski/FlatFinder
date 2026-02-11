@@ -2,6 +2,11 @@ import requests
 from config import queries, headers
 from urllib.parse import urlparse
 from trojmiasto import parseTrojmiasto
+from olx import parseOlx
+
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def main():
     print("Starting FlatFinder...")
@@ -15,7 +20,7 @@ def main():
             elif domain == "www.otodom.pl":
                 pass
             elif domain == "www.olx.pl":
-                pass
+                parseOlx(response)
             else:
                 print("Website not supported.")
         else:
