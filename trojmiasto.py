@@ -19,6 +19,10 @@ def parseTrojmiasto(response: requests.Response):
         priceTag = ad.select("p.list__item__price__value span")[0]
         price = ''.join(filter(str.isdigit, priceTag.text))
 
+        otherCosts = 0
+
+        isRealtorListing = True
+
         notes = "xyz"
 
         ad_info = {
@@ -26,6 +30,8 @@ def parseTrojmiasto(response: requests.Response):
             "link": link,
             "image_link": imageUrl,
             "price": price,
+            "other_costs": otherCosts,
+            "is_realtor": isRealtorListing,
             "notes": notes
         }
         ads_json.append(ad_info)

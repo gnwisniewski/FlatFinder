@@ -3,6 +3,7 @@ from config import queries, headers
 from urllib.parse import urlparse
 from trojmiasto import parseTrojmiasto
 from olx import parseOlx
+from otodom import parseOtodom
 
 import sys
 import io
@@ -18,7 +19,7 @@ def main():
             if domain == "ogloszenia.trojmiasto.pl":
                 parseTrojmiasto(response)
             elif domain == "www.otodom.pl":
-                pass
+                parseOtodom(response)
             elif domain == "www.olx.pl":
                 parseOlx(response)
             else:
