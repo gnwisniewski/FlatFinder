@@ -1,25 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
 
-def parseOlx(response: requests.Response):
+def parseOtodom(response: requests.Response):
     soup = BeautifulSoup(response.text, "html.parser")
     
     ads_json = []
     
-    matching_ads = soup.select("div.css-j0t2x2")[0]
-    ads = matching_ads.select("div.css-1sw7q4x")
+    matching_ads = soup.select("div[data-cy='search.listing.organic']")[0]
+    ads = matching_ads.select("ul section")
     for ad in ads:
-        titleTagParent = ad.select("a.css-1tqlkj0")[1]
-        titleTag = titleTagParent.select("h4.css-hzlye5")[0]
+        titleTag = ad.select("p.css-135367.e11az2p02")[0]
         title = titleTag.text
 
-        link = f"www.olx.pl/{titleTagParent.get('href')}"
+        linkTag = ad.select("a.css-16vl3c1.e13tkx7i0")[0]
+        link = f"www.otodom.pl/{linkTag.get("href")}"
 
-        imageTagParent = ad.select("a.css-1tqlkj0")[0]
-        imageTag = imageTagParent.select("img.css-8wsg1m")[0]
+        imageTag = ad.select("img.css-wmoe9r.enc9gby0")[0]
         imageUrl = imageTag.get("src")
 
-        priceTag = ad.select("p.css-blr5zl")[0]
+        priceTag = ad.select("span.css-ussjv3.eanmlll1")[0]
         price = ''.join(filter(str.isdigit, priceTag.text))
 
         otherCosts = 0
@@ -37,6 +36,7 @@ def parseOlx(response: requests.Response):
             "is_realtor": isRealtorListing,
             "notes": notes
         }
+        print(ad_info)
         ads_json.append(ad_info)
     return ads_json
 
