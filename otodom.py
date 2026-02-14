@@ -36,7 +36,6 @@ def parseOtodom(response: requests.Response):
             "is_realtor": isRealtorListing,
             "notes": notes
         }
-        print(ad_info)
         ads_json.append(ad_info)
     return ads_json
 
