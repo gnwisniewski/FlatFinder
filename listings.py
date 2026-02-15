@@ -52,7 +52,6 @@ def syncListings(scrapped_listings: list[Listing]):
         print(f"New listing found: {link}")
         new_listings.append(new_listing)
         final_listings.append(asdict(new_listing))    
-
     
     df_final = pd.DataFrame(final_listings)
     df_final.to_excel(FILENAME, index=False)
