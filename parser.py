@@ -14,7 +14,7 @@ def parseOtodom(response: requests.Response) -> list[Listing]:
         title = titleTag.text
 
         linkTag = ad.select("a.css-16vl3c1.e13tkx7i0")[0]
-        link = f"www.otodom.pl/{linkTag.get('href')}"
+        link = f"https://www.otodom.pl/{linkTag.get('href')}"
 
         imageTag = ad.select("img.css-wmoe9r.enc9gby0")[0]
         imageUrl = imageTag.get("src")
@@ -45,7 +45,7 @@ def parseOlx(response: requests.Response) -> list[Listing]:
         titleTag = titleTagParent.select("h4.css-hzlye5")[0]
         title = titleTag.text
 
-        link = f"www.olx.pl/{titleTagParent.get('href')}"
+        link = f"https://www.olx.pl/{titleTagParent.get('href')}"
 
         imageTagParent = ad.select("a.css-1tqlkj0")[0]
         imageTag = imageTagParent.select("img.css-8wsg1m")[0]
